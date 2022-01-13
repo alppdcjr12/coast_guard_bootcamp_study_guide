@@ -5,7 +5,7 @@ class ChainOfCommand
     ["Commander in Chief", "The Honorable Joe Biden"],
     ["Secretary of Homeland Security", "The Honorable Alejandro Mayorkas"],
     ["Commandant of the Coast Guard", "Admiral Karl L. Schultz"],
-    ["Deputy Commandant for Mission Support", "Vice Admiral Michael F. McAllister"],
+    ["Deputy Commandant for Mission Support", "Vice Admiral Paul Thomas"],
     ["Commander Force Readiness Command", "Rear Admiral M. W. Raymond"],
     ["Commanding Officer TRACEN Cape May", "Captain Sarah Felger"],
     ["Executive Officer", nil],
