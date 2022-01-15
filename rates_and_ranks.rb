@@ -22,6 +22,9 @@ class RateRank
     ["O-8", "Rear Admiral (upper half)", "RADM", "Zero two silver stars", "Zero two silver stars", "Zero two silver stars below zero one anchor behind zero one shield on a field of gold", "Zero one two-inch gold band below zero one half-inch gold band"],
     ["O-9", "Vice Admiral", "VADM", "Zero three silver stars", "Zero three silver stars", "Zero three silver stars below zero one anchor behind zero one shield on a field of gold", "Zero one two-inch gold band below zero two half-inch gold bands"],
     ["O-10", "Admiral", "ADM", "Zero four silver stars", "Zero four silver stars", "Zero four silver stars below zero one anchor behind zero one shield on a field of gold", "Zero one two-inch gold band below zero three half-inch gold bands"],
+    ["W-2", "Chief Warrant Officer 2", "W-2", "Zero one gold bar with zero three blue breaks", "zero one half-inch gold band with zero three blue breaks", "zero one half-inch gold band with zero three blue breaks below zero one gold shield below zero one rating symbol on a field of blue", nil],
+    ["W-3", "Chief Warrant Officer 3", "W-3", "Zero one silver bar with zero two blue breaks", "zero one half-inch gold band with zero two blue breaks", "zero one half-inch gold band with zero two blue breaks below zero one gold shield below zero one rating symbol on a field of blue", nil],
+    ["W-4", "Chief Warrant Officer 4", "W-4", "Zero one silver bar with zero three blue breaks", "zero one half-inch gold band with zero one blue break", "zero one half-inch gold band with zero one blue break below zero one gold shield below zero one rating symbol on a field of blue", nil],
   ]
 
   attr_reader :pay_grade, :title, :abbreviation, :collar_device, :shoulder_insignia, :lacing, :type1, :type2
@@ -38,8 +41,7 @@ class RateRank
   end
 
   def ask
-    question = "What #{@type1} corresponds to the following #{@type2}?"
-    puts question.to_symbol.to_s.sub("_", " ")
+    puts "What #{@type1} corresponds to the following #{@type2}?".gsub("_", " ")
     puts self.send(@type2)
     gets
     puts self.send(@type1)
@@ -51,49 +53,44 @@ end
 RATES_AND_RANKS_QUESTIONS = []
 
 RateRank::RATES_AND_RANKS.each_with_index do |arr, i|
+  if i < 9 && i > 11
+    RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :pay_grade)
+    RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :collar_device)
+    RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :collar_device)
+    if 1 < 22
+      RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :pay_grade)
+    end
+  end
+  if 1 < 22
+    RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :abbreviation)
+  end
   if i > 2 && i < RateRank::RATES_AND_RANKS.length
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :collar_device, :pay_grade)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :collar_device, :title)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :collar_device, :shoulder_insignia)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :collar_device, :abbreviation)
-    RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :collar_device)
-    RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :collar_device)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :collar_device)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :collar_device)
   end
-  if i > 11 && i < RateRank::RATES_AND_RANKS.length
+  if i > 11 && i < 22
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :lacing, :collar_device)
-  end
-
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :pay_grade)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :pay_grade)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :pay_grade)
-  if i > 11 && i < RateRank::RATES_AND_RANKS.length
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :lacing, :pay_grade)
-  end
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :title)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :title)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :title)
-  if i > 11 && i < RateRank::RATES_AND_RANKS.length
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :lacing, :title)
-  end
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :shoulder_insignia)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :shoulder_insignia)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :shoulder_insignia)
-  if i > 11 && i < RateRank::RATES_AND_RANKS.length
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :lacing, :shoulder_insignia)
-  end
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :abbreviation)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :abbreviation)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :abbreviation)
-  if i > 11 && i < RateRank::RATES_AND_RANKS.length
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :lacing, :abbreviation)
-  end
-  if i > 11 && i < RateRank::RATES_AND_RANKS.length
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :lacing)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :lacing)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :lacing)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :collar_device, :lacing)
     RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :lacing)
   end
+
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :pay_grade)
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :title)
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :title)
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :shoulder_insignia)
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :shoulder_insignia)
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :shoulder_insignia)
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :abbreviation)
+  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :abbreviation)
 end

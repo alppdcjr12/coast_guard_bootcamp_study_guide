@@ -1,10 +1,10 @@
 class History
   FACTS = {
     "What organization does the Coast Guard originally trace its roots to?": "The United States Revenue Cutter Service",
-    "Who established the Revenue Cutter Services?": "Alexander Hamilton",
+    "Who established the Revenue Cutter Service?": "Alexander Hamilton",
     "Who was the 'father of the Coast Guard'?": "Alexander Hamilton",
-    "What department was the Revenue Cutter Services established under?": "The Department of the Treasury",
-    "When was the Revenue Cutter Services established?": "August 4th, 1790",
+    "What department was the Revenue Cutter Service established under?": "The Department of the Treasury",
+    "When was the Revenue Cutter Service established?": "August 4th, 1790",
     "What did the initial laws establishing the Revenue Cutter Service authorize?": "The building of ten cutters tasked with enforcement of tariff laws and prevention of smuggling",
     "What were the original ten cutters in the Revenue Cutter Service named?": "Massachusetts, Scammel, Active, Eagle, Diligence, Argus, Vigilant, Virginia, South Carolina, and General Greene",
     "When was the modern Coast Guard created?": "January 28th, 1915",
