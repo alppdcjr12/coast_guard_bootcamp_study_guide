@@ -1,23 +1,9 @@
+require "csv"
+
 class ChainOfCommand
   attr_reader :title, :person, :type, :reports_to, :below
 
-  PEOPLE = [
-    ["Commander in Chief", "The Honorable Joe Biden"],
-    ["Secretary of Homeland Security", "The Honorable Alejandro Mayorkas"],
-    ["Commandant of the Coast Guard", "Admiral Karl L. Schultz"],
-    ["Deputy Commandant for Mission Support", "Vice Admiral Paul Thomas"],
-    ["Commander Force Readiness Command", "Rear Admiral M. W. Raymond"],
-    ["Commanding Officer TRACEN Cape May", "Captain Sarah Felger"],
-    ["Executive Officer", nil],
-    ["Training Officer", nil],
-    ["Regimental Officer", nil],
-    ["Battalion Officer", nil],
-    ["Battalion Commander", nil],
-    ["Assistant Battalion Commander", nil],
-    ["Section Commander", nil],
-    ["Lead Company Commander", nil],
-    ["Company Commander", nil],
-  ]
+  PEOPLE = CSV.read("resources/chain_of_command.csv")
 
   def initialize(index, arr, type)
     @title = arr[0]
@@ -41,7 +27,7 @@ class ChainOfCommand
   def ask
     if @type == "chain1"
       puts "Who does #{full_name_and_title} report to?"
-      gets
+      STDIN.gets
       if @reports_to
         puts @reports_to.full_name_and_title
       else
@@ -49,7 +35,7 @@ class ChainOfCommand
       end
     elsif @type == "chain2"
       puts "Who is directly below #{full_name_and_title} in the Chain of Command?"
-      gets
+      STDIN.gets
       if @below
         puts @below.full_name_and_title
       else
@@ -57,15 +43,15 @@ class ChainOfCommand
       end
     elsif @type == "identity1"
       puts "Who is the #{@title}?"
-      gets
+      STDIN.gets
       puts @person
     elsif @type == "identity2"
       puts "What is #{@person}'s title?"
-      gets
+      STDIN.gets
       puts @title
     end
 
-    gets
+    STDIN.gets
     system 'cls'
 
   end

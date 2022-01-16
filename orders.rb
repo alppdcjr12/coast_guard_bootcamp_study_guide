@@ -31,9 +31,9 @@ class Order
 
   def ask
     puts "What is the #{ordinal} general order?"
-    gets
+    STDIN.gets
     puts "The #{ordinal} general order is '#{@content}'"
-    gets
+    STDIN.gets
     system 'cls'
   end
 

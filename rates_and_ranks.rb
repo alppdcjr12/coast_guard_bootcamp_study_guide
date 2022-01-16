@@ -1,35 +1,12 @@
+require_relative "phonetic_alphabet.rb"
+require "csv"
+
 class RateRank
-  RATES_AND_RANKS = [
-    ["E-1", "Seaman Recruit", "SR", nil, "Zero one white stripe", "Zero one white stripe on a field of blue", nil],
-    ["E-2", "Seaman Apprentice", "SA", nil, "Zero two white stripes", "Zero two white stripes on a field of blue", nil],
-    ["E-3", "Seaman", "SN", nil, "Zero three white stripes", "Zero three white stripes on a field of blue", nil],
-    ["E-4", "Petty Officer Third Class", "PO3", "Zero one gold chevron", "Zero one red chevron", "Zero one red chevron below zero one white rating insignia below zero one white crow on a field of blue", nil],
-    ["E-5", "Petty Officer Second Class", "PO2", "Zero two gold chevrons", "Zero two red chevrons", "Zero two red chevrons below zero one white rating insignia below zero one white crow on a field of blue", nil],
-    ["E-6", "Petty Officer First Class", "PO1", "Zero three gold chevrons", "Zero three red chevrons", "Zero three red chevrons below zero one white rating insignia below zero one white crow on a field of blue", nil],
-    ["E-7", "Chief Petty Officer", "CPO", "Zero one gold anchor", "Zero three gold chevrons below zero one gold rocker", "Zero three gold chevrons below zero one white rating insignia below zero one gold rocker below zero one white crow on a field of blue", nil],
-    ["E-8", "Senior Chief Petty Officer", "SCPO", "Zero one gold anchor below zero one silver star", "Zero three gold chevrons below zero one gold rocker below zero one silver star", "Zero three gold chevrons below zero one white rating insignia below zero one gold rocker below zero one white crow below zero one silver star on a field of blue", nil],
-    ["E-9", "Master Chief Petty Officer", "MCPO", "Zero one gold anchor below zero two silver stars", "Zero three gold chevrons below zero one gold rocker below zero two silver stars", "Zero three gold chevrons below zero one white rating insignia below zero one gold rocker below zero one white crow below zero two silver stars on a field of blue", nil],
-    ["E-9 CMC", "Command Master Chief Petty Officer", "CMC", "Zero one gold anchor below zero two silver stars", "Zero three gold chevrons below zero one gold rocker below zero two silver stars", "Zero three gold chevrons below zero one silver shield below zero one gold rocker below zero one white crow below zero two silver stars on a field of blue", nil],
-    ["E-9 MCPOCGR", "Master Chief Petty Officer of the Coast Guard Reserve", "MCPOCGR", "Zero one gold anchor below zero two silver stars", "Zero three gold chevrons below zero one gold rocker below zero two gold stars", "Zero three gold chevrons below zero one gold shield below zero one gold rocker below zero one white crow below zero two gold stars on a field of blue", nil],
-    ["E-9 MCPOCG", "Master Chief Petty Officer of the Coast Guard", "MCPOCG", "Zero one gold anchor below zero three silver stars", "Zero three gold chevrons below zero one gold rocker below zero three gold stars", "Zero three gold chevrons below zero one gold shield below zero one gold rocker below zero one white crow below zero three gold stars on a field of blue", nil],
-    ["O-1", "Ensign", "ENS", "Zero one gold bar", "Zero one half-inch gold band", "Zero one half-inch gold band below zero one gold shield on a field of blue", "Zero one half-inch gold band"],
-    ["O-2", "Lieutenant Junior Grade", "LTJG", "Zero one silver bar", "Zero one half-inch gold band below zero one quarter-inch gold band", "Zero one half-inch gold band below zero one quarter-inch gold band below zero one gold shield on a field of blue", "Zero one half-inch gold band below zero one quarter-inch gold band"],
-    ["O-3", "Lieutenant", "LT", "Zero two silver bars", "Zero two half-inch gold bands", "Zero two half-inch gold bands below zero one gold shield on a field of blue", "Zero two half-inch gold bands"],
-    ["O-4", "Lieutenant Commander", "LCDR", "Zero one gold oak leaf", "Zero one half-inch gold band below zero one quarter-inch gold band below another zero one half-inch gold band", "Zero one half-inch gold band below zero one quarter-inch gold band below another zero one half-inch gold band below zero one gold shield on a field of blue", "Zero one half-inch gold band below zero one quarter-inch gold band below another zero one half-inch gold band"],
-    ["O-5", "Commander", "CDR", "Zero one silver oak leaf", "Zero three half-inch gold bands", "Zero three half-inch gold bands below zero one gold shield on a field of blue", "Zero three half-inch gold bands"],
-    ["O-6", "Captain", "CAPT", "Zero one silver eagle", "Zero four half-inch gold bands", "Zero four half-inch gold bands below zero one gold shield on a field of blue", "Zero four half-inch gold bands"],
-    ["O-7", "Rear Admiral (lower half)", "RDML", "Zero one silver star", "Zero one silver star", "Zero one silver star below zero one anchor behind zero one shield on a field of gold", "Zero one two-inch gold band"],
-    ["O-8", "Rear Admiral (upper half)", "RADM", "Zero two silver stars", "Zero two silver stars", "Zero two silver stars below zero one anchor behind zero one shield on a field of gold", "Zero one two-inch gold band below zero one half-inch gold band"],
-    ["O-9", "Vice Admiral", "VADM", "Zero three silver stars", "Zero three silver stars", "Zero three silver stars below zero one anchor behind zero one shield on a field of gold", "Zero one two-inch gold band below zero two half-inch gold bands"],
-    ["O-10", "Admiral", "ADM", "Zero four silver stars", "Zero four silver stars", "Zero four silver stars below zero one anchor behind zero one shield on a field of gold", "Zero one two-inch gold band below zero three half-inch gold bands"],
-    ["W-2", "Chief Warrant Officer 2", "W-2", "Zero one gold bar with zero three blue breaks", "zero one half-inch gold band with zero three blue breaks", "zero one half-inch gold band with zero three blue breaks below zero one gold shield below zero one rating symbol on a field of blue", nil],
-    ["W-3", "Chief Warrant Officer 3", "W-3", "Zero one silver bar with zero two blue breaks", "zero one half-inch gold band with zero two blue breaks", "zero one half-inch gold band with zero two blue breaks below zero one gold shield below zero one rating symbol on a field of blue", nil],
-    ["W-4", "Chief Warrant Officer 4", "W-4", "Zero one silver bar with zero three blue breaks", "zero one half-inch gold band with zero one blue break", "zero one half-inch gold band with zero one blue break below zero one gold shield below zero one rating symbol on a field of blue", nil],
-  ]
+  RATES_AND_RANKS = CSV.read("resources/rates_and_ranks.csv")
 
   attr_reader :pay_grade, :title, :abbreviation, :collar_device, :shoulder_insignia, :lacing, :type1, :type2
 
-  def initialize(pay_grade, title, abbreviation, collar_device, shoulder_insignia, alt_shoulder_insignia, lacing, type1, type2)
+  def initialize(pay_grade, title, abbreviation, collar_device, shoulder_insignia, alt_shoulder_insignia, lacing, type1, type2, phonetic=false)
     @pay_grade = pay_grade
     @title = title
     @abbreviation = abbreviation
@@ -38,16 +15,29 @@ class RateRank
     @lacing = lacing
     @type1 = type1
     @type2 = type2
+    @phonetic = phonetic
   end
 
   def ask
-    puts "What #{@type1} corresponds to the following #{@type2}?".gsub("_", " ")
-    puts self.send(@type2)
-    gets
-    puts self.send(@type1)
-    gets
+    given = self.send(@type2)
+    if @phonetic
+      if @type2 == :pay_grade || (@type2 == :abbreviation && given[0] == "W")
+        phonetic = given.split("").map.with_index { |c, i| i == 0 ? replace_phonetic(c) : c }.join("")
+        puts "What is the #{@type1} for the #{@type2} #{phonetic}?".gsub("_", " ")
+      else
+        puts "What is the #{@type1} for the #{@type2} #{replace_phonetic(given)}?".gsub("_", " ")
+      end
+    else
+      puts "What is the #{@type1} for the #{@type2} #{given}?".gsub("_", " ")
+    end
+    STDIN.gets
+    answer = self.send(@type1)
+    answer += " (#{@title})" if @type1 != :title && @type2 != :title
+    puts answer
+    STDIN.gets
     system 'cls'
   end
+
 end
 
 RATES_AND_RANKS_QUESTIONS = []
@@ -92,5 +82,30 @@ RateRank::RATES_AND_RANKS.each_with_index do |arr, i|
   RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :shoulder_insignia)
   RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :shoulder_insignia)
   RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :abbreviation)
-  RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :abbreviation)
+end
+
+PHONETIC_RATES_AND_RANKS_QUESTIONS = []
+
+RateRank::RATES_AND_RANKS.each_with_index do |arr, i|
+  if i < 9 && i > 11
+    PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :pay_grade, phonetic=true)
+    if 1 < 22
+      PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :abbreviation, :pay_grade, phonetic=true)
+    end
+  end
+  if 1 < 22
+    PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :pay_grade, :abbreviation, phonetic=true)
+  end
+  if i > 2 && i < RateRank::RATES_AND_RANKS.length
+    PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :collar_device, :pay_grade, phonetic=true)
+    PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :collar_device, :abbreviation, phonetic=true)
+  end
+  if i > 11 && i < 22
+    PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :lacing, :pay_grade, phonetic=true)
+    PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :lacing, :abbreviation, phonetic=true)
+  end
+
+  PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :pay_grade, phonetic=true)
+  PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :shoulder_insignia, :abbreviation, phonetic=true)
+  PHONETIC_RATES_AND_RANKS_QUESTIONS << RateRank.new(*arr, :title, :abbreviation, phonetic=true)
 end

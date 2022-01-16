@@ -25,4 +25,52 @@ PHONETIC_ALPHABET = {
   "X" => "X-Ray",
   "Y" => "Yankee",
   "Z" => "Zulu",
+  "a" => "alpha",
+  "b" => "bravo",
+  "c" => "charlie",
+  "d" => "delta",
+  "e" => "echo",
+  "f" => "foxtrot",
+  "g" => "golf",
+  "h" => "hotel",
+  "i" => "india",
+  "j" => "juliet",
+  "k" => "kilo",
+  "l" => "lima",
+  "m" => "mike",
+  "n" => "november",
+  "o" => "oscar",
+  "p" => "papa",
+  "q" => "quebec",
+  "r" => "romeo",
+  "s" => "sierra",
+  "t" => "tango",
+  "u" => "uniform",
+  "v" => "victor",
+  "w" => "whiskey",
+  "x" => "x-ray",
+  "y" => "yankee",
+  "z" => "zulu",
+  "-" => "-",
+  "0" => "0",
+  "1" => "1",
+  "2" => "2",
+  "3" => "3",
+  "4" => "4",
+  "5" => "5",
+  "6" => "6",
+  "7" => "7",
+  "8" => "8",
+  "9" => "9",
 }
+
+def replace_phonetic(phrase)
+  phonetic = ""
+  words = phrase.split(" ")
+  words.each_with_index do |word, i|
+    word = word.split("").map { |char| PHONETIC_ALPHABET[char] }.join("-")
+    phonetic += word
+    phonetic += " " unless i == words.length-1
+  end
+  phonetic
+end
