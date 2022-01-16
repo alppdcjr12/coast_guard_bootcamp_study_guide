@@ -1,4 +1,5 @@
 require "csv"
+require "open3"
 
 class EnlistedRating
   ENLISTED_RATINGS = CSV.read("resources/enlisted_ratings.csv")
@@ -8,6 +9,8 @@ class EnlistedRating
   def initialize(abbreviation, rating, type)
     @abbreviation = abbreviation
     @rating = rating
+    @img_path = "resources/rating_images/#{abbreviation.downcase}.png"
+    @type = type
     if type == "get_abbreviation"
       @question = "What is the abbreviation for #{@rating}?"
       @answer = @abbreviation
@@ -29,7 +32,7 @@ end
  
 ENLISTED_RATING_QUESTIONS = []
 
-EnlistedRating::ENLISTED_RATINGS.each do |k, v|
-  ENLISTED_RATING_QUESTIONS << EnlistedRating.new(k, v, type="get_abbreviation")
-  ENLISTED_RATING_QUESTIONS << EnlistedRating.new(k, v, type="get_rating")
+EnlistedRating::ENLISTED_RATINGS.each do |arr|
+  ENLISTED_RATING_QUESTIONS << EnlistedRating.new(*arr, type="get_abbreviation")
+  ENLISTED_RATING_QUESTIONS << EnlistedRating.new(*arr, type="get_rating")
 end
