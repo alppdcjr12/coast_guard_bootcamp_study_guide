@@ -9,10 +9,10 @@ class NauticalTerminology
     @term = term
     @meaning = meaning
     if type == "get_term"
-      @question = "What is the military/nautical term for #{@meaning}?"
+      @question = "What is the military/nautical term for \"#{@meaning}\"?"
       @answer = @term
     elsif type == "get_meaning"
-      @question = "What does #{@term} mean in military/nautical terminology?"
+      @question = "What does \"#{@term}\" mean in military/nautical terminology?"
       @answer = @meaning
     end
   end
