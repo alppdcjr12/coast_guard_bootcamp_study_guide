@@ -48,7 +48,11 @@ class StudyGuide
       end
     else
       focuses.each do |focus|
-        @questions += FOCUS_ARGS[focus]
+        begin
+          @questions += FOCUS_ARGS[focus]
+        rescue TypeError
+          @questions += SPECIAL_FOCUS_ARGS[focus]
+        end
       end
       @questions.shuffle! unless focuses[0] == "LIST_ALL_ENLISTED_RATINGS" && focuses.length == 1
     end
