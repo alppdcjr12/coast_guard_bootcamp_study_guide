@@ -22,6 +22,6 @@ end
 
 HISTORY_QUESTIONS = []
 
-History::FACTS.each do |k, v|
-  HISTORY_QUESTIONS << History.new(k, v)
+History::FACTS.each do |q, a|
+  HISTORY_QUESTIONS << History.new(q, a)
 end

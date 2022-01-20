@@ -39,6 +39,6 @@ class Order
 
 end
 
-GENERAL_ORDER_QUESTIONS = Order::GENERAL_ORDERS.map.with_index do |order, i|
+GENERAL_ORDERS_QUESTIONS = Order::GENERAL_ORDERS.map.with_index do |order, i|
   Order.new(i, order)
 end

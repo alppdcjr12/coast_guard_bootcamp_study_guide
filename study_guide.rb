@@ -1,19 +1,21 @@
-require_relative "orders"
-require_relative "history"
-require_relative "chain_of_command"
-require_relative "rates_and_ranks"
-require_relative "enlisted_ratings"
-require_relative "nautical_terminology"
+require_relative "objects/orders"
+require_relative "objects/history"
+require_relative "objects/chain_of_command"
+require_relative "objects/rates_and_ranks"
+require_relative "objects/enlisted_ratings"
+require_relative "objects/nautical_terminology"
+require_relative "objects/force_protection_conditions"
 
 FOCUS_ARGS = {
-  "GENERAL_ORDER" => GENERAL_ORDER_QUESTIONS,
+  "GENERAL_ORDERS" => GENERAL_ORDERS_QUESTIONS,
   "HISTORY" => HISTORY_QUESTIONS,
   "CHAIN_OF_COMMAND" => CHAIN_OF_COMMAND_QUESTIONS,
   "RATES_AND_RANKS" => RATES_AND_RANKS_QUESTIONS,
   "PHONETIC_RANKS_AND_RANKS" => PHONETIC_RATES_AND_RANKS_QUESTIONS,
-  "ENLISTED_RATING" => ENLISTED_RATING_QUESTIONS,
+  "ENLISTED_RATINGS" => ENLISTED_RATINGS_QUESTIONS,
   "NAUTICAL_TERMINOLOGY" => NAUTICAL_TERMINOLOGY_QUESTIONS,
-  "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATING_QUESTIONS,
+  "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATINGS_QUESTIONS,
+  "FORCE_PROTECTION_CONDITIONS" => FORCE_PROTECTION_CONDITIONS_QUESTIONS,
 }
 
 USER_CHOICE_ARGS = {

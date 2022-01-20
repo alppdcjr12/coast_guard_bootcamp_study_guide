@@ -33,13 +33,13 @@ class EnlistedRating
 
 end
  
-ENLISTED_RATING_QUESTIONS = []
+ENLISTED_RATINGS_QUESTIONS = []
 
 EnlistedRating::ENLISTED_RATINGS.each do |arr|
-  ENLISTED_RATING_QUESTIONS << EnlistedRating.new(*arr, type="get_abbreviation")
-  ENLISTED_RATING_QUESTIONS << EnlistedRating.new(*arr, type="get_rating")
+  ENLISTED_RATINGS_QUESTIONS << EnlistedRating.new(*arr, type="get_abbreviation")
+  ENLISTED_RATINGS_QUESTIONS << EnlistedRating.new(*arr, type="get_rating")
 end
 
-LIST_ALL_ENLISTED_RATING_QUESTIONS = EnlistedRating::ENLISTED_RATINGS.map do |arr|
+LIST_ALL_ENLISTED_RATINGS_QUESTIONS = EnlistedRating::ENLISTED_RATINGS.map do |arr|
   EnlistedRating.new(*arr, type="list_all")
 end.reverse

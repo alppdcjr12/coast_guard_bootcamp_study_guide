@@ -1,0 +1,5 @@
+FPCON Normal,Routine security posture,"Applies when a general global threat of possible terrorist activity exists and warrants a routine security posture"
+FPCON Alpha,Possible terrorist activity,"Applies when there is an increased general threat of possible terrorist activity against personnel or facilities, and the nature and extent of the threat are unpredictable"
+FPCON Bravo,Predictable terrorist threat activity exists,"Applies when an increased or more predictable threat of terrorist activity exists"
+FPCON Charlie,Terrorist targeting of personnel and facilities is imminent,"Applies when an incident occurs or intelligence is received indicating some form of terrorist action or targeting against personnel or facilities is likely"
+FPCON Delta,Terrorist action against a specific location,"Applies in the immediate area where a terrorist attack has occurred or when intelligence has been received indicating that terrorist action against a specific location or person is imminent"
