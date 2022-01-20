@@ -18,7 +18,7 @@ class EnlistedRating
       @question = "What rating is abbreviated with #{@abbreviation}?"
       @answer = @rating
     elsif type == "list_all"
-      @question = ""
+      @question = "Next enlisted rating?"
       @answer = "#{@rating} (#{@abbreviation})"
     end
   end
