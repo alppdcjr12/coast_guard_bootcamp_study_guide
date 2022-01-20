@@ -14,8 +14,11 @@ FOCUS_ARGS = {
   "PHONETIC_RANKS_AND_RANKS" => PHONETIC_RATES_AND_RANKS_QUESTIONS,
   "ENLISTED_RATINGS" => ENLISTED_RATINGS_QUESTIONS,
   "NAUTICAL_TERMINOLOGY" => NAUTICAL_TERMINOLOGY_QUESTIONS,
-  "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATINGS_QUESTIONS,
   "FORCE_PROTECTION_CONDITIONS" => FORCE_PROTECTION_CONDITIONS_QUESTIONS,
+}
+
+SPECIAL_FOCUS_ARGS = {
+  "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATINGS_QUESTIONS,
 }
 
 USER_CHOICE_ARGS = {
@@ -33,18 +36,21 @@ class StudyGuide
     FOCUS_ARGS.keys.each do |arg|
       focuses << arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
     end
-    unless focuses.empty?
-      focuses.each do |focus|
-        @questions += FOCUS_ARGS[focus]
-      end
-      @questions.shuffle! unless focuses[0] == "LIST_ALL_ENLISTED_RATINGS" && focuses.length == 1
-    else
+    SPECIAL_FOCUS_ARGS.keys.each do |arg|
+      focuses << arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
+    end
+    if focuses.empty?
       FOCUS_ARGS.each do |k, v|
         if !ARGV.include?("OMIT_" + k)
           @questions += v
           @questions.shuffle!
         end
       end
+    else
+      focuses.each do |focus|
+        @questions += FOCUS_ARGS[focus]
+      end
+      @questions.shuffle! unless focuses[0] == "LIST_ALL_ENLISTED_RATINGS" && focuses.length == 1
     end
     @complete = []
     @current_question = nil
