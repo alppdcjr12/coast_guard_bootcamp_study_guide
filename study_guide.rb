@@ -27,13 +27,15 @@ class StudyGuide
 
   def initialize
     @questions = []
-    focus = nil
+    focuses = []
     FOCUS_ARGS.keys.each do |arg|
-      focus = arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
+      focuses << arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
     end
-    if focus
-      @questions += FOCUS_ARGS[focus]
-      @questions.shuffle! unless focus == "LIST_ALL_ENLISTED_RATINGS"
+    unless focuses.empty?
+      focuses.each do |focus|
+        @questions += FOCUS_ARGS[focus]
+      end
+      @questions.shuffle! unless focuses[0] == "LIST_ALL_ENLISTED_RATINGS" && focuses.length == 1
     else
       FOCUS_ARGS.each do |k, v|
         if !ARGV.include?("OMIT_" + k)
