@@ -17,6 +17,9 @@ class EnlistedRating
     elsif type == "get_rating"
       @question = "What rating is abbreviated with #{@abbreviation}?"
       @answer = @rating
+    elsif type == "list_all"
+      @question = ""
+      @answer = "#{@rating} (#{@abbreviation})"
     end
   end
 
@@ -36,3 +39,7 @@ EnlistedRating::ENLISTED_RATINGS.each do |arr|
   ENLISTED_RATING_QUESTIONS << EnlistedRating.new(*arr, type="get_abbreviation")
   ENLISTED_RATING_QUESTIONS << EnlistedRating.new(*arr, type="get_rating")
 end
+
+LIST_ALL_ENLISTED_RATING_QUESTIONS = EnlistedRating::ENLISTED_RATINGS.map do |arr|
+  EnlistedRating.new(*arr, type="list_all")
+end.reverse

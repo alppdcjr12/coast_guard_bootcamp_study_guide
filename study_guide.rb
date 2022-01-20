@@ -5,73 +5,43 @@ require_relative "rates_and_ranks"
 require_relative "enlisted_ratings"
 require_relative "nautical_terminology"
 
+FOCUS_ARGS = {
+  "GENERAL_ORDER" => GENERAL_ORDER_QUESTIONS,
+  "HISTORY" => HISTORY_QUESTIONS,
+  "CHAIN_OF_COMMAND" => CHAIN_OF_COMMAND_QUESTIONS,
+  "RATES_AND_RANKS" => RATES_AND_RANKS_QUESTIONS,
+  "PHONETIC_RANKS_AND_RANKS" => PHONETIC_RATES_AND_RANKS_QUESTIONS,
+  "ENLISTED_RATING" => ENLISTED_RATING_QUESTIONS,
+  "NAUTICAL_TERMINOLOGY" => NAUTICAL_TERMINOLOGY_QUESTIONS,
+  "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATING_QUESTIONS,
+}
+
+USER_CHOICE_ARGS = {
+  "Go back [n] questions" => ["repeat", "r", "back", "b"],
+  "Restart questions from the beginning" => ["restart", "rs", "start_over", "so", "beginning", "b"],
+  "Print instructions" => ["instructions", "i"],
+  "Quit program" => ["quit", "q"],
+}
+
 class StudyGuide
 
   def initialize
     @questions = []
-    only = nil
     focus = nil
-    [
-      "ONLY_GENERAL_ORDER",
-      "ONLY_HISTORY",
-      "ONLY_CHAIN_OF_COMMAND",
-      "ONLY_RATES_AND_RANKS",
-      "ONLY_PHONETIC_RANKS_AND_RANKS",
-      "ONLY_ENLISTED_RATING",
-      "ONLY_NAUTICAL_TERMINOLOGY"
-    ].each do |arg|
-      if ARGV.include?(arg)
-        only = true
-        focus = arg
-      end
+    FOCUS_ARGS.keys.each do |arg|
+      focus = arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
     end
-    if only
-      if focus == "ONLY_GENERAL_ORDER"
-        @questions += GENERAL_ORDER_QUESTIONS
-      elsif focus == "ONLY_HISTORY"
-        @questions += HISTORY_QUESTIONS
-      elsif focus == "ONLY_CHAIN_OF_COMMAND"
-        @questions += CHAIN_OF_COMMAND_QUESTIONS
-      elsif focus == "ONLY_RATES_AND_RANKS"
-        @questions += RATES_AND_RANKS_QUESTIONS
-      elsif focus == "ONLY_PHONETIC_RANKS_AND_RANKS"
-        @questions += PHONETIC_RATES_AND_RANKS_QUESTIONS
-      elsif focus == "ONLY_ENLISTED_RATING"
-        @questions += ENLISTED_RATING_QUESTIONS
-      elsif focus == "ONLY_NAUTICAL_TERMINOLOGY"
-        @questions += NAUTICAL_TERMINOLOGY_QUESTIONS
-      end
+    if focus
+      @questions += FOCUS_ARGS[focus]
+      @questions.shuffle! unless focus == "LIST_ALL_ENLISTED_RATINGS"
     else
-      if !ARGV.include?("OMIT_GENERAL_ORDER")
-        @questions += GENERAL_ORDER_QUESTIONS
-        @questions.shuffle!
-      end
-      if !ARGV.include?("OMIT_HISTORY")
-        @questions += HISTORY_QUESTIONS
-        @questions.shuffle!
-      end
-      if !ARGV.include?("OMIT_CHAIN_OF_COMMAND")
-        @questions += CHAIN_OF_COMMAND_QUESTIONS
-        @questions.shuffle!
-      end
-      if !ARGV.include?("OMIT_RATES_AND_RANKS")
-        @questions += RATES_AND_RANKS_QUESTIONS
-        @questions.shuffle!
-      end
-      if !ARGV.include?("OMIT_PHONETIC_RATES_AND_RANKS")
-        @questions += PHONETIC_RATES_AND_RANKS_QUESTIONS
-        @questions.shuffle!
-      end
-      if !ARGV.include?("OMIT_ENLISTED_RATING")
-        @questions += ENLISTED_RATING_QUESTIONS
-        @questions.shuffle!
-      end
-      if !ARGV.include?("OMIT_NAUTICAL_TERMINOLOGY")
-        @questions += NAUTICAL_TERMINOLOGY_QUESTIONS
-        @questions.shuffle!
+      FOCUS_ARGS.each do |k, v|
+        if !ARGV.include?("OMIT_" + k)
+          @questions += v
+          @questions.shuffle!
+        end
       end
     end
-    @questions.shuffle!
     @complete = []
     @current_question = nil
   end
@@ -81,10 +51,22 @@ class StudyGuide
       puts "#{@questions.length} questions remaining."
       @current_question = @questions.pop
       @current_question.ask
-      next_task = STDIN.gets.chomp
-      return true if ["quit", "q"].include?(next_task)
-      if ["repeat", "r", "back", "b"].include?(next_task.split(" ")[0])
-        num = next_task.split(" ")[1]
+      get_user_choice
+    end
+    puts "Questions complete!"
+  end
+  
+  def get_user_choice
+    input = STDIN.gets.chomp
+    return true if USER_CHOICE_ARGS["Quit program"].include?(input)
+    print_instructions if USER_CHOICE_ARGS["Print instructions"].include?(input)
+    if USER_CHOICE_ARGS["Restart questions from the beginning"].include?(input)
+      @questions << @current_question
+      @questions << @complete.pop until @complete.empty?
+    else
+      args = input.split(" ")
+      if USER_CHOICE_ARGS["Go back [n] questions"].include?(args[0])
+        num = args[1]
         begin
           num = num.to_i
           @questions << @current_question
@@ -98,10 +80,18 @@ class StudyGuide
       else
         @complete << @current_question
       end
-
     end
-    puts "Questions complete!"
   end
+
+  def print_instructions
+    system('cls')
+    puts "Instructions:"
+    USER_CHOICE_ARGS.each do |k, v|
+      appended_n = k.include?("[n]") ? " [n]" : ""
+      puts k + ": " + v.join("/") + appended_n
+    end
+  end
+
 end
 
 g = StudyGuide.new
