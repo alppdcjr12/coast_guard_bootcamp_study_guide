@@ -1,7 +1,7 @@
 require "csv"
 require "open3"
 
-class EnlistedRating
+class EnlistedRatingsQuestion
   ENLISTED_RATINGS = CSV.read("resources/enlisted_ratings.csv")
 
   attr_reader :abbreviation, :rating
@@ -35,11 +35,11 @@ end
  
 ENLISTED_RATINGS_QUESTIONS = []
 
-EnlistedRating::ENLISTED_RATINGS.each do |arr|
-  ENLISTED_RATINGS_QUESTIONS << EnlistedRating.new(*arr, type="get_abbreviation")
-  ENLISTED_RATINGS_QUESTIONS << EnlistedRating.new(*arr, type="get_rating")
+EnlistedRatingsQuestion::ENLISTED_RATINGS.each do |arr|
+  ENLISTED_RATINGS_QUESTIONS << EnlistedRatingsQuestion.new(*arr, type="get_abbreviation")
+  ENLISTED_RATINGS_QUESTIONS << EnlistedRatingsQuestion.new(*arr, type="get_rating")
 end
 
-LIST_ALL_ENLISTED_RATINGS_QUESTIONS = EnlistedRating::ENLISTED_RATINGS.map do |arr|
-  EnlistedRating.new(*arr, type="list_all")
+LIST_ALL_ENLISTED_RATINGS_QUESTIONS = EnlistedRatingsQuestion::ENLISTED_RATINGS.map do |arr|
+  EnlistedRatingsQuestion.new(*arr, type="list_all")
 end.reverse

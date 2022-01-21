@@ -1,4 +1,4 @@
-class Order
+class GeneralOrdersQuestion
   
   GENERAL_ORDERS = [
     "To take charge of this post and all government property in view.",
@@ -39,6 +39,6 @@ class Order
 
 end
 
-GENERAL_ORDERS_QUESTIONS = Order::GENERAL_ORDERS.map.with_index do |order, i|
-  Order.new(i, order)
+GENERAL_ORDERS_QUESTIONS = GeneralOrdersQuestion::GENERAL_ORDERS.map.with_index do |order, i|
+  GeneralOrdersQuestion.new(i, order)
 end

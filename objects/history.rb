@@ -1,6 +1,6 @@
 require "csv"
 
-class History
+class HistoryQuestion
   FACTS = CSV.read("resources/history.csv")
 
   attr_reader :question, :answer
@@ -22,6 +22,6 @@ end
 
 HISTORY_QUESTIONS = []
 
-History::FACTS.each do |q, a|
-  HISTORY_QUESTIONS << History.new(q, a)
+HistoryQuestion::FACTS.each do |q, a|
+  HISTORY_QUESTIONS << HistoryQuestion.new(q, a)
 end

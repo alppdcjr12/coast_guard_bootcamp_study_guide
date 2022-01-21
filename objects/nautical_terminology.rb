@@ -1,6 +1,6 @@
 require "csv"
 
-class NauticalTerminology
+class NauticalTerminologyQuestion
   NAUTICAL_TERMINOLOGY = CSV.read("resources/nautical_terminology.csv")
 
   attr_reader :term, :meaning
@@ -29,7 +29,7 @@ end
  
 NAUTICAL_TERMINOLOGY_QUESTIONS = []
 
-NauticalTerminology::NAUTICAL_TERMINOLOGY.each do |k, v|
-  NAUTICAL_TERMINOLOGY_QUESTIONS << NauticalTerminology.new(k, v, type="get_term")
-  NAUTICAL_TERMINOLOGY_QUESTIONS << NauticalTerminology.new(k, v, type="get_meaning")
+NauticalTerminologyQuestion::NAUTICAL_TERMINOLOGY.each do |k, v|
+  NAUTICAL_TERMINOLOGY_QUESTIONS << NauticalTerminologyQuestion.new(k, v, type="get_term")
+  NAUTICAL_TERMINOLOGY_QUESTIONS << NauticalTerminologyQuestion.new(k, v, type="get_meaning")
 end

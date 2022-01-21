@@ -1,6 +1,6 @@
 require "csv"
 
-class ForceProtectionCondition
+class ForceProtectionConditionsQuestion
   FPCONS = CSV.read("resources/force_protection_conditions.csv")
 
   attr_reader :fp_con, :description, :definition
@@ -34,8 +34,8 @@ end
 
 FORCE_PROTECTION_CONDITIONS_QUESTIONS = []
 
-ForceProtectionCondition::FPCONS.each do |con, descr, definition|
-  FORCE_PROTECTION_CONDITIONS_QUESTIONS << ForceProtectionCondition.new(con, descr, definition, "get_description_and_definition")
-  FORCE_PROTECTION_CONDITIONS_QUESTIONS << ForceProtectionCondition.new(con, descr, definition, "get_condition_from_description")
-  FORCE_PROTECTION_CONDITIONS_QUESTIONS << ForceProtectionCondition.new(con, descr, definition, "get_condition_from_definition")
+ForceProtectionConditionsQuestion::FPCONS.each do |con, descr, definition|
+  FORCE_PROTECTION_CONDITIONS_QUESTIONS << ForceProtectionConditionsQuestion.new(con, descr, definition, "get_description_and_definition")
+  FORCE_PROTECTION_CONDITIONS_QUESTIONS << ForceProtectionConditionsQuestion.new(con, descr, definition, "get_condition_from_description")
+  FORCE_PROTECTION_CONDITIONS_QUESTIONS << ForceProtectionConditionsQuestion.new(con, descr, definition, "get_condition_from_definition")
 end
