@@ -7,7 +7,9 @@ require_relative "objects/nautical_terminology"
 require_relative "objects/force_protection_conditions"
 require_relative "objects/roles_and_missions"
 
-FOCUS_ARGS = {
+require_relative "objects/nonessential/grooming_standards"
+
+ESSENTIAL_FOCUS_ARGS = {
   "GENERAL_ORDERS" => GENERAL_ORDERS_QUESTIONS,
   "HISTORY" => HISTORY_QUESTIONS,
   "CHAIN_OF_COMMAND" => CHAIN_OF_COMMAND_QUESTIONS,
@@ -23,6 +25,12 @@ SPECIAL_FOCUS_ARGS = {
   "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATINGS_QUESTIONS,
 }
 
+NONESSENTIAL_FOCUS_ARGS = {
+  "GROOMING_STANDARDS" => GROOMING_STANDARDS_QUESTIONS,
+}
+
+FOCUS_ARGS = [ESSENTIAL_FOCUS_ARGS, NONESSENTIAL_FOCUS_ARGS, SPECIAL_FOCUS_ARGS]
+
 USER_CHOICE_ARGS = {
   "Go back [n] questions" => ["repeat", "r", "back", "b"],
   "Restart questions from the beginning" => ["restart", "rs", "start_over", "so", "beginning", "b"],
@@ -37,34 +45,43 @@ class StudyGuide
     @focuses = []
     @complete = []
     @current_question = nil
+    @include_nonessential = false
 
     set_focuses_from_args
 
-    @focuses.empty? ? add_questions_from_all_categories : add_focus_questions
+    @focuses.empty? ? add_default_questions : add_focus_questions
   end
 
   def set_focuses_from_args
-    FOCUS_ARGS.keys.each do |arg|
-      @focuses << arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
+    FOCUS_ARGS.each do |focus_hash|
+      focus_hash.keys.each do |arg|
+        @focuses << arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
+      end
     end
-    SPECIAL_FOCUS_ARGS.keys.each do |arg|
-      @focuses << arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
-    end
+    @include_nonessential = ARGV.include?("INCLUDE_NONESSENTIAL")
   end
 
-  def add_questions_from_all_categories
-    FOCUS_ARGS.each do |k, v|
+  def add_default_questions
+    ESSENTIAL_FOCUS_ARGS.each do |k, v|
       @questions += v unless ARGV.include?("OMIT_" + k)
+    end
+    if @include_nonessential
+      NONESSENTIAL_FOCUS_ARGS.each do |k, v|
+        @questions += v unless ARGV.include?("OMIT_" + k)
+      end
     end
     @questions.shuffle!
   end
 
+  def add_nonessential_questions
+
+  end
+
   def add_focus_questions
-    @focuses.each do |focus|
-      begin
-        @questions += FOCUS_ARGS[focus]
-      rescue TypeError
-        @questions += SPECIAL_FOCUS_ARGS[focus]
+    FOCUS_ARGS.each do |focus_hash|
+      @focuses.each do |focus|
+        questions = focus_hash[focus]
+        @questions += questions if questions
       end
     end
     @questions.shuffle! unless @focuses[0] == "LIST_ALL_ENLISTED_RATINGS" && @focuses.length == 1
