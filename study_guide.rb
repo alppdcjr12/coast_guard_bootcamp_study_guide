@@ -8,6 +8,7 @@ require_relative "objects/force_protection_conditions"
 require_relative "objects/roles_and_missions"
 
 require_relative "objects/nonessential/grooming_standards"
+require_relative "objects/nonessential/uniforms"
 
 ESSENTIAL_FOCUS_ARGS = {
   "GENERAL_ORDERS" => GENERAL_ORDERS_QUESTIONS,
@@ -27,6 +28,7 @@ SPECIAL_FOCUS_ARGS = {
 
 NONESSENTIAL_FOCUS_ARGS = {
   "GROOMING_STANDARDS" => GROOMING_STANDARDS_QUESTIONS,
+  "UNIFORMS" => UNIFORMS_QUESTIONS,
 }
 
 FOCUS_ARGS = [ESSENTIAL_FOCUS_ARGS, NONESSENTIAL_FOCUS_ARGS, SPECIAL_FOCUS_ARGS]
@@ -92,14 +94,16 @@ class StudyGuide
       puts "#{@questions.length} questions remaining."
       @current_question = @questions.pop
       @current_question.ask
-      get_user_choice
+      if !get_user_choice
+        return true
+      end
     end
     puts "Questions complete!"
   end
   
   def get_user_choice
     input = STDIN.gets.chomp
-    return true if USER_CHOICE_ARGS["Quit program"].include?(input)
+    return false if USER_CHOICE_ARGS["Quit program"].include?(input)
     print_instructions if USER_CHOICE_ARGS["Print instructions"].include?(input)
     if USER_CHOICE_ARGS["Restart questions from the beginning"].include?(input)
       @questions << @current_question
