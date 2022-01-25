@@ -1,8 +1,8 @@
-Adrift,"Loose from moorings (lost, out of hand, left lying about)"
+Adrift,"Loose from moorings; lost, out of hand, left lying about"
 Aft,Towards the rear
 Aloft,"Above the ship's uppermost solid structure, overhead or high above"
 Alongside,By the side of the pier or ship
-All hands/Muster/Quarters,Assemble all hands for accountability
+All hands,Assemble all hands for accountability
 Avast,To cancel an order; to cease
 Awash,Setting so low in the water that the water is constantly washing across the top surface
 Barracks,Building where military personnel live
@@ -30,11 +30,11 @@ Fast,Snugly secured
 Fathom,A six foot unit of length
 Fender,"A piece of equipment, such as an inflated ball, which when inserted between the vessel and another object will absorb shock and prevent damage"
 Fore,Towards the bow of the ship
-Forecastle,"Upper deck in the forward part of the ship, pronounced ""FOKE-sul"""
+"Forecastle (pronounced ""FOKE-sul"")","Upper deck in the forward part of the ship"
 Galley,Cooking compartment on a vessel
 Gangway,Opening in a bulwark/lifeline that provides access to a brow; an order meaning to clear the way
-Gear locker,Storage room
-Gunwale,"Upper edge or rail of a ship or boat's side, pronounced ""GUN'nle"""
+Gear locker,Storage compartment
+"Gunwale (pronounced ""GUN'nle"")","Upper edge or rail of a ship or boat's side"
 Hawser,Large line
 Head,Bathroom
 Inboard,Toward the center of the ship
@@ -44,6 +44,7 @@ Lee,Side of the vessel sheltered from wind
 Liberty,Permission to leave the base
 Mast,"The vertical structure from a vessel that holds rigging for flags and pennants, electronic equipment, and the National Ensign while underway; the flagpole at a shore-based unit"
 Mess deck,The compartment where enlisted personnel eat
+Muster,Assemble all hands for accountability
 Officer of the day/deck,"The officer who acting directly under the commanding officer is responsible on an assigned day/watch for overseeing the unit/vessel, preserving order, protecting property, and enforcing regulations"
 Outboard,Away from the center of the ship
 Overhead,Ceiling
@@ -51,6 +52,7 @@ Part,"To break, as of a line"
 Passageway,Hallway
 Port,Left side of the ship from the perspective of looking forward
 Quarterdeck,Area between squad bays; location where inport vessels and shore units stand watch
+Quarters,Assemble all hands for accountability
 Rack,Bed
 Reveille,Wake up; start of a new day
 Scullery,Compartment for washing and sterilizing eating utensils

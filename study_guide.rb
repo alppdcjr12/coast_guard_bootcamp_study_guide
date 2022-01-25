@@ -37,8 +37,8 @@ NONESSENTIAL_FOCUS_ARGS = {
 FOCUS_ARGS = [ESSENTIAL_FOCUS_ARGS, NONESSENTIAL_FOCUS_ARGS, SPECIAL_FOCUS_ARGS]
 
 USER_CHOICE_ARGS = {
-  "Go back [n] questions" => ["repeat", "r", "back", "b"],
-  "Restart questions from the beginning" => ["restart", "rs", "start_over", "so", "beginning", "b"],
+  "Go back [n] questions" => ["repeat", "r", "back", "b"], # i.e. "back [n]""
+  "Restart questions from the beginning" => ["restart", "rs", "start_over", "so", "beginning"],
   "Print instructions" => ["instructions", "i"],
   "Quit program" => ["quit", "q"],
 }
@@ -90,7 +90,8 @@ class StudyGuide
 
   def run
     while !@questions.empty?
-      puts "#{@questions.length} questions remaining."
+      s = @questions.length > 1 ? "s" : ""
+      puts "#{@questions.length} question#{s} remaining."
       @current_question = @questions.pop
       @current_question.ask
       if !get_user_choice
