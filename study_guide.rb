@@ -9,6 +9,7 @@ require_relative "objects/roles_and_missions"
 
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
+require_relative "objects/nonessential/nonrate_enlisted_evaluation_system"
 
 ESSENTIAL_FOCUS_ARGS = {
   "GENERAL_ORDERS" => GENERAL_ORDERS_QUESTIONS,
@@ -29,6 +30,8 @@ SPECIAL_FOCUS_ARGS = {
 NONESSENTIAL_FOCUS_ARGS = {
   "GROOMING_STANDARDS" => GROOMING_STANDARDS_QUESTIONS,
   "UNIFORMS" => UNIFORMS_QUESTIONS,
+  "NONRATE_ENLISTED_EVALUATION_SYTEM" => NONRATE_ENLISTED_EVALUATION_SYSTEM_QUESTIONS,
+  "NONRATE_EES" => NONRATE_ENLISTED_EVALUATION_SYSTEM_QUESTIONS,
 }
 
 FOCUS_ARGS = [ESSENTIAL_FOCUS_ARGS, NONESSENTIAL_FOCUS_ARGS, SPECIAL_FOCUS_ARGS]
@@ -73,10 +76,6 @@ class StudyGuide
       end
     end
     @questions.shuffle!
-  end
-
-  def add_nonessential_questions
-
   end
 
   def add_focus_questions
