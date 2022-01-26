@@ -6,6 +6,7 @@ require_relative "objects/enlisted_ratings"
 require_relative "objects/nautical_terminology"
 require_relative "objects/force_protection_conditions"
 require_relative "objects/roles_and_missions"
+require_relative "objects/international_code_of_signals"
 
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
@@ -21,6 +22,7 @@ ESSENTIAL_FOCUS_ARGS = {
   "NAUTICAL_TERMINOLOGY" => NAUTICAL_TERMINOLOGY_QUESTIONS,
   "FORCE_PROTECTION_CONDITIONS" => FORCE_PROTECTION_CONDITIONS_QUESTIONS,
   "ROLES_AND_MISSIONS" => ROLES_AND_MISSIONS_QUESTIONS,
+  "INTERNATIONAL_CODE_OF_SIGNALS" => INTERNATIONAL_CODE_OF_SIGNALS_QUESTIONS,
 }
 
 SPECIAL_FOCUS_ARGS = {
