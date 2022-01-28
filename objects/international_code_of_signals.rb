@@ -29,7 +29,12 @@ end
 
 INTERNATIONAL_CODE_OF_SIGNALS_QUESTIONS = []
 
+FLAG_MEANINGS_IN_ORDER = []
+
 InternationalCodeOfSignalsQuestion::FLAGS.each do |flag, meaning|
   INTERNATIONAL_CODE_OF_SIGNALS_QUESTIONS << InternationalCodeOfSignalsQuestion.new(flag, meaning, "get_meaning")
   INTERNATIONAL_CODE_OF_SIGNALS_QUESTIONS << InternationalCodeOfSignalsQuestion.new(flag, meaning, "get_flag")
+  FLAG_MEANINGS_IN_ORDER << InternationalCodeOfSignalsQuestion.new(flag, meaning, "get_meaning")
 end
+
+FLAG_MEANINGS_IN_ORDER.reverse!

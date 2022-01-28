@@ -14,6 +14,9 @@ class NauticalTerminologyQuestion
     elsif type == "get_meaning"
       @question = "What does \"#{@term}\" mean in military/nautical terminology?"
       @answer = @meaning
+    elsif type == "words_in_order"
+      @question = "Next?"
+      @answer = @term
     end
   end
 
@@ -28,8 +31,12 @@ class NauticalTerminologyQuestion
 end
  
 NAUTICAL_TERMINOLOGY_QUESTIONS = []
+NAUTICAL_TERMINOLOGY_WORDS_IN_ORDER = []
 
 NauticalTerminologyQuestion::NAUTICAL_TERMINOLOGY.each do |k, v|
   NAUTICAL_TERMINOLOGY_QUESTIONS << NauticalTerminologyQuestion.new(k, v, type="get_term")
   NAUTICAL_TERMINOLOGY_QUESTIONS << NauticalTerminologyQuestion.new(k, v, type="get_meaning")
+  NAUTICAL_TERMINOLOGY_WORDS_IN_ORDER << NauticalTerminologyQuestion.new(k, v, type="words_in_order")
 end
+
+NAUTICAL_TERMINOLOGY_WORDS_IN_ORDER.reverse!

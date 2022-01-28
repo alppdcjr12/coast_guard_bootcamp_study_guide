@@ -27,6 +27,8 @@ ESSENTIAL_FOCUS_ARGS = {
 
 SPECIAL_FOCUS_ARGS = {
   "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATINGS_QUESTIONS,
+  "FLAG_MEANINGS" => FLAG_MEANINGS_IN_ORDER,
+  "NAUTICAL_TERMINOLOGY_WORDS_IN_ORDER" => NAUTICAL_TERMINOLOGY_WORDS_IN_ORDER,
 }
 
 NONESSENTIAL_FOCUS_ARGS = {
@@ -87,7 +89,7 @@ class StudyGuide
         @questions += questions if questions
       end
     end
-    @questions.shuffle! unless @focuses[0] == "LIST_ALL_ENLISTED_RATINGS" && @focuses.length == 1
+    @questions.shuffle! unless SPECIAL_FOCUS_ARGS.keys.include?(@focuses[0]) && @focuses.length == 1
   end
 
   def run
