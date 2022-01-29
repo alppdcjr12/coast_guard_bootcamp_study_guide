@@ -11,13 +11,13 @@ require_relative "objects/international_code_of_signals"
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
 require_relative "objects/nonessential/nonrate_enlisted_evaluation_system"
+require_relative "objects/nonessential/knots"
 
 ESSENTIAL_FOCUS_ARGS = {
   "GENERAL_ORDERS" => GENERAL_ORDERS_QUESTIONS,
   "HISTORY" => HISTORY_QUESTIONS,
   "CHAIN_OF_COMMAND" => CHAIN_OF_COMMAND_QUESTIONS,
   "RATES_AND_RANKS" => RATES_AND_RANKS_QUESTIONS,
-  "PHONETIC_RANKS_AND_RANKS" => PHONETIC_RATES_AND_RANKS_QUESTIONS,
   "ENLISTED_RATINGS" => ENLISTED_RATINGS_QUESTIONS,
   "NAUTICAL_TERMINOLOGY" => NAUTICAL_TERMINOLOGY_QUESTIONS,
   "FORCE_PROTECTION_CONDITIONS" => FORCE_PROTECTION_CONDITIONS_QUESTIONS,
@@ -36,9 +36,15 @@ NONESSENTIAL_FOCUS_ARGS = {
   "UNIFORMS" => UNIFORMS_QUESTIONS,
   "NONRATE_ENLISTED_EVALUATION_SYTEM" => NONRATE_ENLISTED_EVALUATION_SYSTEM_QUESTIONS,
   "NONRATE_EES" => NONRATE_ENLISTED_EVALUATION_SYSTEM_QUESTIONS,
+  "KNOTS" => KNOTS_QUESTIONS,
 }
 
-FOCUS_ARGS = [ESSENTIAL_FOCUS_ARGS, NONESSENTIAL_FOCUS_ARGS, SPECIAL_FOCUS_ARGS]
+PHONETIC_FOCUS_ARGS = {
+  "PHONETIC_RANKS_AND_RANKS" => PHONETIC_RATES_AND_RANKS_QUESTIONS,
+  "PHONETIC_ENLISTED_RATINGS_QUESTIONS" => PHONETIC_ENLISTED_RATINGS_QUESTIONS,
+}
+
+FOCUS_ARGS = [ESSENTIAL_FOCUS_ARGS, NONESSENTIAL_FOCUS_ARGS, SPECIAL_FOCUS_ARGS, PHONETIC_FOCUS_ARGS]
 
 USER_CHOICE_ARGS = {
   "Go back [n] questions" => ["repeat", "r", "back", "b"], # i.e. "back [n]""
@@ -68,6 +74,7 @@ class StudyGuide
       end
     end
     @include_nonessential = ARGV.include?("INCLUDE_NONESSENTIAL")
+    @phonetic_only = ARGV.include?("PHONETIC")
   end
 
   def add_default_questions
@@ -76,6 +83,12 @@ class StudyGuide
     end
     if @include_nonessential
       NONESSENTIAL_FOCUS_ARGS.each do |k, v|
+        @questions += v unless ARGV.include?("OMIT_" + k)
+      end
+    end
+    if @phonetic_only
+      remove_nonphonetic_questions
+      PHONETIC_FOCUS_ARGS.each do |k, v|
         @questions += v unless ARGV.include?("OMIT_" + k)
       end
     end
@@ -142,6 +155,31 @@ class StudyGuide
     USER_CHOICE_ARGS.each do |k, v|
       appended_n = k.include?("[n]") ? " [n]" : ""
       puts k + ": " + v.join("/") + appended_n
+    end
+  end
+
+  def remove_nonphonetic_questions
+    @questions.select! do |question|
+      begin
+        question.type1 != :abbreviation &&
+        question.type2 != :abbreviation &&
+        question.type1 != :pay_grade &&
+        question.type2 != :pay_grade &&
+        PHONETIC_FOCUS_ARGS.values.none? do |question_arr|
+          question_arr.none? do |phonetic_question|
+              phonetic_question.type1 == question.type1 && phonetic_question.type2 == question.type2
+          end
+        end
+      rescue NoMethodError
+        true
+      end
+    end
+    @questions.select! do |question|
+      if question.is_a?(EnlistedRatingsQuestion)
+        question.type == :get_abbreviation
+      else
+        true
+      end
     end
   end
 

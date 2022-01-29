@@ -1,10 +1,11 @@
 require "csv"
 require "open3"
+require_relative "phonetic_alphabet.rb"
 
 class EnlistedRatingsQuestion
   ENLISTED_RATINGS = CSV.read("resources/enlisted_ratings.csv")
 
-  attr_reader :abbreviation, :rating
+  attr_reader :abbreviation, :rating, :type
 
   def initialize(abbreviation, rating, type)
     @abbreviation = abbreviation
@@ -20,6 +21,9 @@ class EnlistedRatingsQuestion
     elsif type == "list_all"
       @question = "Next enlisted rating?"
       @answer = "#{@rating} (#{@abbreviation})"
+    elsif type == "phonetic"
+      @question = "What rating does #{replace_phonetic(@abbreviation)} stand for?"
+      @answer = @rating
     end
   end
 
@@ -43,3 +47,7 @@ end
 LIST_ALL_ENLISTED_RATINGS_QUESTIONS = EnlistedRatingsQuestion::ENLISTED_RATINGS.map do |arr|
   EnlistedRatingsQuestion.new(*arr, type="list_all")
 end.reverse
+
+PHONETIC_ENLISTED_RATINGS_QUESTIONS = EnlistedRatingsQuestion::ENLISTED_RATINGS.map do |arr|
+  EnlistedRatingsQuestion.new(*arr, type="phonetic")
+end
