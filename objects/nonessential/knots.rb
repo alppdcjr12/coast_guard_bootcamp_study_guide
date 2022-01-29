@@ -10,7 +10,7 @@ class KnotsQuestion
     @description = description
     @type = type
     if @type == "get_description"
-      @question = "What is the purpose of a #{@knot}?"
+      @question = "What is the purpose of a #{@knot.downcase}?"
       @answer = "A #{@knot.downcase} is #{@description.downcase}."
     elsif @type == "get_knot"
       @question = "What knot is #{@description.downcase}?"
