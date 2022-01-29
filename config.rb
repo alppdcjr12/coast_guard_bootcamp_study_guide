@@ -8,6 +8,8 @@ require_relative "objects/force_protection_conditions"
 require_relative "objects/roles_and_missions"
 require_relative "objects/international_code_of_signals"
 require_relative "objects/classes_of_fire"
+require_relative "objects/miscellaneous"
+require_relative "objects/semper_paratus"
 
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
@@ -25,6 +27,8 @@ ESSENTIAL_FOCUS_ARGS = {
   "ROLES_AND_MISSIONS" => ROLES_AND_MISSIONS_QUESTIONS,
   "INTERNATIONAL_CODE_OF_SIGNALS" => INTERNATIONAL_CODE_OF_SIGNALS_QUESTIONS,
   "CLASSES_OF_FIRE" => CLASSES_OF_FIRE_QUESTIONS,
+  "MISCELLANEOUS" => MISCELLANEOUS_QUESTIONS,
+  "SEMPER_PARATUS" => SEMPER_PARATUS_QUESTIONS,
 }
 
 SPECIAL_FOCUS_ARGS = {
