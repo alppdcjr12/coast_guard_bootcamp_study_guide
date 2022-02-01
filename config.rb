@@ -1,4 +1,4 @@
-require_relative "objects/orders"
+require_relative "objects/general_orders"
 require_relative "objects/history"
 require_relative "objects/chain_of_command"
 require_relative "objects/rates_and_ranks"
@@ -11,6 +11,7 @@ require_relative "objects/classes_of_fire"
 require_relative "objects/miscellaneous"
 require_relative "objects/semper_paratus"
 require_relative "objects/m16_nomenclature"
+require_relative "objects/firearm_safety_rules"
 
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
@@ -31,6 +32,7 @@ ESSENTIAL_FOCUS_ARGS = {
   "MISCELLANEOUS" => MISCELLANEOUS_QUESTIONS,
   "SEMPER_PARATUS" => SEMPER_PARATUS_QUESTIONS,
   "M16_NOMENCLATURE" => M16_NOMENCLATURE_QUESTION, # only one question that is essential (list all in order)
+  "FIREARM_SAFETY_RULES" => FIREARM_SAFETY_RULES_QUESTIONS,
 }
 
 SPECIAL_FOCUS_ARGS = {
