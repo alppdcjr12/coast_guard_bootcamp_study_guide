@@ -25,7 +25,6 @@ Through surf and storm and howling gale, High shall our purpose be.
 'Semper Paratus' is our guide, Our fame, our glory too,
 To fight to save or fight and die! Aye! Coast Guard, we are for you.
     """,
-
   }
 
   attr_reader :verse, :content
@@ -33,7 +32,6 @@ To fight to save or fight and die! Aye! Coast Guard, we are for you.
   def initialize(verse, content)
     @verse = verse
     @content = content
-
   end
 
   def ask

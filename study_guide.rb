@@ -66,33 +66,46 @@ class StudyGuide
   end
   
   def get_user_choice
+    continue = true
     input = STDIN.gets.chomp
-    return false if USER_CHOICE_ARGS["Quit program"].include?(input)
-    print_instructions if USER_CHOICE_ARGS["Print instructions"].include?(input)
+    while true
+      choice = parse_commands(input)
+      if choice == "quit"
+        return false
+      elsif choice == "continue"
+        return true
+      else
+      input = choice
+      end
+    end
+  end
+
+  def parse_commands(input)
+    if USER_CHOICE_ARGS["Print instructions"].include?(input)
+      input = print_instructions
+      return input
+    end
+    return "quit" if USER_CHOICE_ARGS["Quit program"].include?(input)
     if USER_CHOICE_ARGS["Restart questions from the beginning"].include?(input)
       @questions << @current_question
       @questions << @complete.pop until @complete.empty?
     else
-      go_back_n_questions(input)
+      args = input.split(" ")
+      if USER_CHOICE_ARGS["Go back [n] questions"].include?(args[0])
+        go_back_n_questions(args[1])
+      else
+        @complete << @current_question
+      end
     end
+    return "continue"
   end
 
-  def go_back_n_questions(input)
-    args = input.split(" ")
-    if USER_CHOICE_ARGS["Go back [n] questions"].include?(args[0])
-      num = args[1]
-      begin
-        num = num.to_i
-        @questions << @current_question
-        num -= 1
-        if num > 0
-          num.times { @questions << @complete.pop if !@complete.empty? }
-        end
-      rescue
-        @questions << @current_question
-      end
-    else
-      @complete << @current_question
+  def go_back_n_questions(num)
+    num = num.to_i
+    @questions << @current_question
+    num -= 1
+    if num > 0
+      num.times { @questions << @complete.pop if !@complete.empty? }
     end
   end
 
@@ -103,11 +116,15 @@ class StudyGuide
       appended_n = k.include?("[n]") ? " [n]" : ""
       puts k + ": " + v.join("/") + appended_n
     end
+    puts "Press any key to continue."
+    choice = STDIN.gets.chomp
+    system('cls')
+    choice
   end
 
   def remove_nonphonetic_questions
     @questions.select! do |question|
-      begin
+      if question.is_a?(RatesAndRanksQuestion)
         question.type1 != :abbreviation &&
         question.type2 != :abbreviation &&
         question.type1 != :pay_grade &&
@@ -117,12 +134,7 @@ class StudyGuide
               phonetic_question.type1 == question.type1 && phonetic_question.type2 == question.type2
           end
         end
-      rescue NoMethodError
-        true
-      end
-    end
-    @questions.select! do |question|
-      if question.is_a?(EnlistedRatingsQuestion)
+      elsif question.is_a?(EnlistedRatingsQuestion)
         question.type == :get_abbreviation
       else
         true

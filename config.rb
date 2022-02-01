@@ -10,6 +10,7 @@ require_relative "objects/international_code_of_signals"
 require_relative "objects/classes_of_fire"
 require_relative "objects/miscellaneous"
 require_relative "objects/semper_paratus"
+require_relative "objects/m16_nomenclature"
 
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
@@ -29,12 +30,14 @@ ESSENTIAL_FOCUS_ARGS = {
   "CLASSES_OF_FIRE" => CLASSES_OF_FIRE_QUESTIONS,
   "MISCELLANEOUS" => MISCELLANEOUS_QUESTIONS,
   "SEMPER_PARATUS" => SEMPER_PARATUS_QUESTIONS,
+  "M16_NOMENCLATURE" => M16_NOMENCLATURE_QUESTION, # only one question that is essential (list all in order)
 }
 
 SPECIAL_FOCUS_ARGS = {
   "LIST_ALL_ENLISTED_RATINGS" => LIST_ALL_ENLISTED_RATINGS_QUESTIONS,
   "FLAG_MEANINGS" => FLAG_MEANINGS_IN_ORDER,
   "NAUTICAL_TERMINOLOGY_WORDS_IN_ORDER" => NAUTICAL_TERMINOLOGY_WORDS_IN_ORDER,
+  "LIST_ALL_M16" => LIST_ALL_M16_NOMENCLATURE_QUESTIONS,
 }
 
 NONESSENTIAL_FOCUS_ARGS = {
@@ -53,7 +56,7 @@ PHONETIC_FOCUS_ARGS = {
 FOCUS_ARGS = [ESSENTIAL_FOCUS_ARGS, NONESSENTIAL_FOCUS_ARGS, SPECIAL_FOCUS_ARGS, PHONETIC_FOCUS_ARGS]
 
 USER_CHOICE_ARGS = {
-  "Go back [n] questions" => ["repeat", "r", "back", "b"], # i.e. "back [n]""
+  "Go back [n] questions" => ["repeat", "r", "back", "b"], # i.e. "back [n]"
   "Restart questions from the beginning" => ["restart", "rs", "start_over", "so", "beginning"],
   "Print instructions" => ["instructions", "i"],
   "Quit program" => ["quit", "q"],
