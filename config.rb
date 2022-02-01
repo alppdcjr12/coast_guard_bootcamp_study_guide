@@ -12,6 +12,7 @@ require_relative "objects/miscellaneous"
 require_relative "objects/semper_paratus"
 require_relative "objects/m16_nomenclature"
 require_relative "objects/firearm_safety_rules"
+require_relative "objects/uscg_ethos"
 
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
@@ -31,8 +32,9 @@ ESSENTIAL_FOCUS_ARGS = {
   "CLASSES_OF_FIRE" => CLASSES_OF_FIRE_QUESTIONS,
   "MISCELLANEOUS" => MISCELLANEOUS_QUESTIONS,
   "SEMPER_PARATUS" => SEMPER_PARATUS_QUESTIONS,
-  "M16_NOMENCLATURE" => M16_NOMENCLATURE_QUESTION, # only one question that is essential (list all in order)
+  "M16_NOMENCLATURE" => M16_NOMENCLATURE_QUESTION, # only one question that is essential (list nomenclature)
   "FIREARM_SAFETY_RULES" => FIREARM_SAFETY_RULES_QUESTIONS,
+  "USCG_ETHOS" => USCG_ETHOS_QUESTION, # only one question that is essential (what is the ethos)
 }
 
 SPECIAL_FOCUS_ARGS = {
