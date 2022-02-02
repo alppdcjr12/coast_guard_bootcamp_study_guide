@@ -7,7 +7,7 @@ foxtrot,disabled
 golf,I require a pilot
 hotel,pilot on board
 india,altering course to port
-juliet,on fire or leaking dangerous cargo; keep clear
+juliet,on fire with or leaking dangerous cargo; keep clear
 kilo,desire to communicate
 lima,stop instantly
 mike,I am stopped
@@ -30,3 +30,5 @@ answering pennant,ready to receive/received and understood/end of message
 first substitute,substitute for first flag
 second substitute,substitute for second flag
 third substitute,substitute for third flag OR commanding officer not on board
+Coast Guard ensign,"The Coast Guard ensign is a symbol of the United States Coast Guard law enforcement authority and is, by law under 14 USC 638, restricted to official use only."
+Coast Guard standard,"The Coast Guard standard is used during parades and ceremonies and is adorned by Coast Guard 34 battle streamers. Service-related organizations may use the standard on temporary loan with approval from Commandant (CG-09232)."

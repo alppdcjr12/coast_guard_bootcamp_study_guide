@@ -13,6 +13,7 @@ require_relative "objects/semper_paratus"
 require_relative "objects/m16_nomenclature"
 require_relative "objects/firearm_safety_rules"
 require_relative "objects/uscg_ethos"
+require_relative "objects/core_values"
 
 require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
@@ -35,6 +36,7 @@ ESSENTIAL_FOCUS_ARGS = {
   "M16_NOMENCLATURE" => M16_NOMENCLATURE_QUESTION, # only one question that is essential (list nomenclature)
   "FIREARM_SAFETY_RULES" => FIREARM_SAFETY_RULES_QUESTIONS,
   "USCG_ETHOS" => USCG_ETHOS_QUESTION, # only one question that is essential (what is the ethos)
+  "CORE_VALUES" => ESSENTIAL_CORE_VALUES_QUESTION,
 }
 
 SPECIAL_FOCUS_ARGS = {
@@ -50,6 +52,7 @@ NONESSENTIAL_FOCUS_ARGS = {
   "NONRATE_ENLISTED_EVALUATION_SYTEM" => NONRATE_ENLISTED_EVALUATION_SYSTEM_QUESTIONS,
   "NONRATE_EES" => NONRATE_ENLISTED_EVALUATION_SYSTEM_QUESTIONS,
   "KNOTS" => KNOTS_QUESTIONS,
+  "CORE_VALUES" => NONESSENTIAL_CORE_VALUES_QUESTIONS,
 }
 
 PHONETIC_FOCUS_ARGS = {

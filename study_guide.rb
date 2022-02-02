@@ -17,7 +17,7 @@ class StudyGuide
   def set_focuses_from_args
     FOCUS_ARGS.each do |focus_hash|
       focus_hash.keys.each do |arg|
-        @focuses << arg if ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
+        @focuses << arg if !@focuses.include?(arg) && ARGV.include?(arg) || ARGV.include?("ONLY_" + arg)
       end
     end
     @include_nonessential = ARGV.include?("INCLUDE_NONESSENTIAL")
