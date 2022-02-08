@@ -1,9 +1,9 @@
 require "csv"
 require "open3"
-require_relative "phonetic_alphabet.rb"
+require_relative "../phonetic_alphabet.rb"
 
 class EnlistedRatingsQuestion
-  ENLISTED_RATINGS = CSV.read("resources/enlisted_ratings.csv")
+  ENLISTED_RATINGS = CSV.read("resources/nonessential/enlisted_ratings.csv")
 
   attr_reader :abbreviation, :rating, :type
 

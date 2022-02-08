@@ -2,15 +2,6 @@ require_relative "objects/general_orders"
 require_relative "objects/history"
 require_relative "objects/chain_of_command"
 require_relative "objects/rates_and_ranks"
-require_relative "objects/enlisted_ratings"
-require_relative "objects/nautical_terminology"
-require_relative "objects/force_protection_conditions"
-require_relative "objects/roles_and_missions"
-require_relative "objects/international_code_of_signals"
-require_relative "objects/classes_of_fire"
-require_relative "objects/miscellaneous"
-require_relative "objects/semper_paratus"
-require_relative "objects/m16_nomenclature"
 require_relative "objects/firearm_safety_rules"
 require_relative "objects/uscg_ethos"
 require_relative "objects/core_values"
@@ -19,24 +10,24 @@ require_relative "objects/nonessential/grooming_standards"
 require_relative "objects/nonessential/uniforms"
 require_relative "objects/nonessential/nonrate_enlisted_evaluation_system"
 require_relative "objects/nonessential/knots"
+require_relative "objects/nonessential/semper_paratus"
+require_relative "objects/nonessential/m16_nomenclature"
+require_relative "objects/nonessential/classes_of_fire"
+require_relative "objects/nonessential/nautical_terminology"
+require_relative "objects/nonessential/force_protection_conditions"
+require_relative "objects/nonessential/roles_and_missions"
+require_relative "objects/nonessential/international_code_of_signals"
+require_relative "objects/nonessential/miscellaneous"
+require_relative "objects/nonessential/enlisted_ratings"
 
 ESSENTIAL_FOCUS_ARGS = {
+  "CHAIN_OF_COMMAND" => CHAIN_OF_COMMAND_QUESTIONS,
+  "CORE_VALUES" => ESSENTIAL_CORE_VALUES_QUESTION,
+  "FIREARM_SAFETY_RULES" => FIREARM_SAFETY_RULES_QUESTIONS,
   "GENERAL_ORDERS" => GENERAL_ORDERS_QUESTIONS,
   "HISTORY" => HISTORY_QUESTIONS,
-  "CHAIN_OF_COMMAND" => CHAIN_OF_COMMAND_QUESTIONS,
   "RATES_AND_RANKS" => RATES_AND_RANKS_QUESTIONS,
-  "ENLISTED_RATINGS" => ENLISTED_RATINGS_QUESTIONS,
-  "NAUTICAL_TERMINOLOGY" => NAUTICAL_TERMINOLOGY_QUESTIONS,
-  "FORCE_PROTECTION_CONDITIONS" => FORCE_PROTECTION_CONDITIONS_QUESTIONS,
-  "ROLES_AND_MISSIONS" => ROLES_AND_MISSIONS_QUESTIONS,
-  "INTERNATIONAL_CODE_OF_SIGNALS" => INTERNATIONAL_CODE_OF_SIGNALS_QUESTIONS,
-  "CLASSES_OF_FIRE" => CLASSES_OF_FIRE_QUESTIONS,
-  "MISCELLANEOUS" => MISCELLANEOUS_QUESTIONS,
-  "SEMPER_PARATUS" => SEMPER_PARATUS_QUESTIONS,
-  "M16_NOMENCLATURE" => M16_NOMENCLATURE_QUESTION, # only one question that is essential (list nomenclature)
-  "FIREARM_SAFETY_RULES" => FIREARM_SAFETY_RULES_QUESTIONS,
   "USCG_ETHOS" => USCG_ETHOS_QUESTION, # only one question that is essential (what is the ethos)
-  "CORE_VALUES" => ESSENTIAL_CORE_VALUES_QUESTION,
 }
 
 SPECIAL_FOCUS_ARGS = {
@@ -53,6 +44,15 @@ NONESSENTIAL_FOCUS_ARGS = {
   "NONRATE_EES" => NONRATE_ENLISTED_EVALUATION_SYSTEM_QUESTIONS,
   "KNOTS" => KNOTS_QUESTIONS,
   "CORE_VALUES" => NONESSENTIAL_CORE_VALUES_QUESTIONS,
+  "SEMPER_PARATUS" => SEMPER_PARATUS_QUESTIONS,
+  "M16_NOMENCLATURE" => M16_NOMENCLATURE_QUESTION,
+  "CLASSES_OF_FIRE" => CLASSES_OF_FIRE_QUESTIONS,
+  "FORCE_PROTECTION_CONDITIONS" => FORCE_PROTECTION_CONDITIONS_QUESTIONS,
+  "NAUTICAL_TERMINOLOGY" => NAUTICAL_TERMINOLOGY_QUESTIONS,
+  "ROLES_AND_MISSIONS" => ROLES_AND_MISSIONS_QUESTIONS,
+  "INTERNATIONAL_CODE_OF_SIGNALS" => INTERNATIONAL_CODE_OF_SIGNALS_QUESTIONS,
+  "MISCELLANEOUS" => MISCELLANEOUS_QUESTIONS,
+  "ENLISTED_RATINGS" => ENLISTED_RATINGS_QUESTIONS,
 }
 
 PHONETIC_FOCUS_ARGS = {

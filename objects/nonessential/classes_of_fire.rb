@@ -1,8 +1,8 @@
-require_relative "phonetic_alphabet.rb"
+require_relative "../phonetic_alphabet.rb"
 require "csv"
 
 class ClassOfFireQuestion
-  CLASSES_OF_FIRE = CSV.read("resources/classes_of_fire.csv")
+  CLASSES_OF_FIRE = CSV.read("resources/nonessential/classes_of_fire.csv")
 
   attr_reader :fire_class, :symbol, :fuel, :smoke_color, :extinguishing_options, :type1, :type2
 

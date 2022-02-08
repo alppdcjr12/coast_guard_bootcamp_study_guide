@@ -1,7 +1,7 @@
 require "csv"
 
 class NauticalTerminologyQuestion
-  NAUTICAL_TERMINOLOGY = CSV.read("resources/nautical_terminology.csv")
+  NAUTICAL_TERMINOLOGY = CSV.read("resources/nonessential/nautical_terminology.csv")
 
   attr_reader :term, :meaning
 

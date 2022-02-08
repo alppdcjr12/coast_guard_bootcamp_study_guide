@@ -1,7 +1,7 @@
 require "csv"
 
 class M16NomenclatureQuestion
-  M16_PARTS = CSV.read("resources/m16_nomenclature.csv")
+  M16_PARTS = CSV.read("resources/nonessential/m16_nomenclature.csv")
 
   attr_reader :m_16_part
 

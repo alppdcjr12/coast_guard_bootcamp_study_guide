@@ -1,7 +1,7 @@
 require "csv"
 
 class InternationalCodeOfSignalsQuestion
-  FLAGS = CSV.read("resources/international_code_of_signals.csv")
+  FLAGS = CSV.read("resources/nonessential/international_code_of_signals.csv")
 
   attr_reader :flag, :meaning
 

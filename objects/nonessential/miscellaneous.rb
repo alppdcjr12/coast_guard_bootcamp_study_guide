@@ -1,7 +1,7 @@
 require "csv"
 
 class MiscellaneousQuestion
-  FACTS = CSV.read("resources/miscellaneous.csv")
+  FACTS = CSV.read("resources/nonessential/miscellaneous.csv")
 
   attr_reader :question, :answer
 

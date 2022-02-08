@@ -34,7 +34,7 @@ class ChainOfCommandQuestion
         puts "no one"
       end
     elsif @type == "chain2"
-      puts "Who is directly below #{full_name_and_title} in the Chain of Command?"
+      puts "Who is directly below #{@person} in the Chain of Command?"
       STDIN.gets
       if @below
         puts @below.full_name_and_title

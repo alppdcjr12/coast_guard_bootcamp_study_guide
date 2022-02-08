@@ -2,7 +2,7 @@ require "csv"
 require "open3"
 
 class RolesAndMissionsQuestion
-  ROLES_AND_MISSIONS = CSV.read("resources/roles_and_missions.csv")
+  ROLES_AND_MISSIONS = CSV.read("resources/nonessential/roles_and_missions.csv")
 
   attr_reader :role, :description, :missions, :type
 

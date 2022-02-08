@@ -1,7 +1,7 @@
 require "csv"
 
 class ForceProtectionConditionsQuestion
-  FPCONS = CSV.read("resources/force_protection_conditions.csv")
+  FPCONS = CSV.read("resources/nonessential/force_protection_conditions.csv")
 
   attr_reader :fp_con, :description, :definition
 
