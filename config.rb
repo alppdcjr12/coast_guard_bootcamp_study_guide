@@ -67,4 +67,5 @@ USER_CHOICE_ARGS = {
   "Restart questions from the beginning" => ["restart", "rs", "start_over", "so", "beginning"],
   "Print instructions" => ["instructions", "i"],
   "Quit program" => ["quit", "q"],
+  "Debug" => ["debug", "d"],
 }

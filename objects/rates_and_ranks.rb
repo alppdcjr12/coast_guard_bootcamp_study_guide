@@ -47,11 +47,11 @@ RatesAndRanksQuestion::RATES_AND_RANKS.each_with_index do |arr, i|
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :title, :pay_grade)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :pay_grade, :collar_device)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :abbreviation, :collar_device)
-    if 1 < 22
+    if i < 22
       RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :abbreviation, :pay_grade)
     end
   end
-  if 1 < 22
+  if i < 22
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :pay_grade, :abbreviation)
   end
   if i > 2 && i < RatesAndRanksQuestion::RATES_AND_RANKS.length
@@ -66,10 +66,8 @@ RatesAndRanksQuestion::RATES_AND_RANKS.each_with_index do |arr, i|
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :lacing, :collar_device)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :lacing, :pay_grade)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :lacing, :title)
-    RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :lacing, :shoulder_insignia)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :lacing, :abbreviation)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :pay_grade, :lacing)
-    RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :shoulder_insignia, :lacing)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :title, :lacing)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :collar_device, :lacing)
     RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :abbreviation, :lacing)
@@ -89,11 +87,11 @@ PHONETIC_RATES_AND_RANKS_QUESTIONS = []
 RatesAndRanksQuestion::RATES_AND_RANKS.each_with_index do |arr, i|
   if i < 9 && i > 11
     PHONETIC_RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :title, :pay_grade, phonetic=true)
-    if 1 < 22
+    if i < 22
       PHONETIC_RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :abbreviation, :pay_grade, phonetic=true)
     end
   end
-  if 1 < 22
+  if i < 22
     PHONETIC_RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :pay_grade, :abbreviation, phonetic=true)
   end
   if i > 2 && i < RatesAndRanksQuestion::RATES_AND_RANKS.length

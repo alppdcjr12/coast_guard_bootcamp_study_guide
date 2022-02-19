@@ -53,6 +53,7 @@ class StudyGuide
   end
 
   def run
+    system 'cls'
     while !@questions.empty?
       s = @questions.length > 1 ? "s" : ""
       puts "#{@questions.length} question#{s} remaining."
@@ -82,8 +83,11 @@ class StudyGuide
 
   def parse_commands(input)
     if USER_CHOICE_ARGS["Print instructions"].include?(input)
-      input = print_instructions
+      input = print_instructions #print instructions and also get user input again
       return input
+    end
+    if USER_CHOICE_ARGS["Debug"].include?(input)
+      p @complete[-1]
     end
     return "quit" if USER_CHOICE_ARGS["Quit program"].include?(input)
     if USER_CHOICE_ARGS["Restart questions from the beginning"].include?(input)
