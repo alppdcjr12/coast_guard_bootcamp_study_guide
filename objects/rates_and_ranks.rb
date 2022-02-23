@@ -107,3 +107,6 @@ RatesAndRanksQuestion::RATES_AND_RANKS.each_with_index do |arr, i|
   PHONETIC_RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :shoulder_insignia, :abbreviation, phonetic=true)
   PHONETIC_RATES_AND_RANKS_QUESTIONS << RatesAndRanksQuestion.new(*arr, :title, :abbreviation, phonetic=true)
 end
+
+RANDOM_RATES_AND_RANKS_QUESTIONS = RATES_AND_RANKS_QUESTIONS.sample(20)
+RANDOM_PHONETIC_RATES_AND_RANKS_QUESTIONS = PHONETIC_RATES_AND_RANKS_QUESTIONS.sample(20)

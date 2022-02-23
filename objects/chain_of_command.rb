@@ -1,7 +1,7 @@
 require "csv"
 
 class ChainOfCommandQuestion
-  attr_reader :title, :person, :type, :reports_to, :below
+  attr_reader :title, :person, :type, :reports_to, :below, :question
 
   PEOPLE = CSV.read("resources/chain_of_command.csv")
 
@@ -9,10 +9,35 @@ class ChainOfCommandQuestion
     @title = arr[0]
     @person = arr[1]
     @type = type
+    set_q_and_a
     if @type == "get_superior"
       @reports_to = index > 0 ? ChainOfCommandQuestion.new(index-1, PEOPLE[index-1], "reference") : nil
     elsif @type == "get_subordinate"
       @below = index < PEOPLE.length-1 ? ChainOfCommandQuestion.new(index+1, PEOPLE[index+1], "reference") : nil
+    end
+  end
+
+  def set_q_and_a
+    if @type == "get_superior"
+      @question = "Who does #{full_name_and_title} report to?"
+      if @reports_to
+        @answer = @reports_to.full_name_and_title
+      else
+        @answer = "no one"
+      end
+    elsif @type == "get_subordinate"
+      @question = "Who is directly below #{full_name_or_title} in the Chain of Command?"
+      if @below
+        @answer = @below.full_name_and_title
+      else
+        @answer = "myself"
+      end
+    elsif @type == "get_person_with_title"
+      @question = "Who is the #{@title}?"
+      @answer = @person
+    elsif @type == "get_title_of_person"
+      @question = "What is #{@person}'s title?"
+      @answer = @title
     end
   end
 
@@ -29,35 +54,11 @@ class ChainOfCommandQuestion
   end
 
   def ask
-    if @type == "get_superior"
-      puts "Who does #{full_name_and_title} report to?"
-      STDIN.gets
-      if @reports_to
-        puts @reports_to.full_name_and_title
-      else
-        puts "no one"
-      end
-    elsif @type == "get_subordinate"
-      puts "Who is directly below #{full_name_or_title} in the Chain of Command?"
-      STDIN.gets
-      if @below
-        puts @below.full_name_and_title
-      else
-        puts "myself"
-      end
-    elsif @type == "get_person_with_title"
-      puts "Who is the #{@title}?"
-      STDIN.gets
-      puts @person
-    elsif @type == "get_title_of_person"
-      puts "What is #{@person}'s title?"
-      STDIN.gets
-      puts @title
-    end
-
+    puts @question
+    STDIN.gets
+    puts @answer
     STDIN.gets
     system 'cls'
-
   end
 end
 
@@ -70,7 +71,7 @@ ChainOfCommandQuestion::PEOPLE.each_with_index do |person_arr, i|
   if i < ChainOfCommandQuestion::PEOPLE.length-1
     CHAIN_OF_COMMAND_QUESTIONS << ChainOfCommandQuestion.new(i, person_arr, "get_subordinate")
   end
-  if i >= 0 && i <= 5
+  if person_arr.length > 1 && person_arr[1] != nil
     CHAIN_OF_COMMAND_QUESTIONS << ChainOfCommandQuestion.new(i, person_arr, "get_person_with_title")
     CHAIN_OF_COMMAND_QUESTIONS << ChainOfCommandQuestion.new(i, person_arr, "get_title_of_person")
   end
