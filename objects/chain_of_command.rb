@@ -9,12 +9,12 @@ class ChainOfCommandQuestion
     @title = arr[0]
     @person = arr[1]
     @type = type
-    set_q_and_a
     if @type == "get_superior"
       @reports_to = index > 0 ? ChainOfCommandQuestion.new(index-1, PEOPLE[index-1], "reference") : nil
     elsif @type == "get_subordinate"
       @below = index < PEOPLE.length-1 ? ChainOfCommandQuestion.new(index+1, PEOPLE[index+1], "reference") : nil
     end
+    set_q_and_a
   end
 
   def set_q_and_a
