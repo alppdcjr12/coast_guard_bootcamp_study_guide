@@ -43,7 +43,7 @@ class ChainOfCommandQuestion
 
   def full_name_and_title
     if @person
-      @person.include?(@title) ? "#{@person}" : "#{@person}, #{@title}"
+      @person.include?(@title) ? "#{@person}" : "#{@title} #{@person}"
     else
       "the #{@title}"
     end
