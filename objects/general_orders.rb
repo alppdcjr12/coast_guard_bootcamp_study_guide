@@ -6,10 +6,10 @@ class GeneralOrdersQuestion
     "To report all violations of orders I am instructed to enforce.",
     "To repeat all calls from posts more distant from the guardhouse than my own.",
     "To quit my post only when properly relieved.",
-    "To receive, obey and pass on to the sentry who relieves me all orders from the Commanding Officer, Field Officer of the Day, Officer of the Day, and Officers and Petty Officers of the Watch.",
+    "To receive, obey and pass on to the sentry who relieves me all orders from the Commanding Officer, Command Duty Officer, Officer of the Deck, and Officers and Petty Officer of the Watch only.",
     "To talk to no one except in the line of duty.",
-    "To raise the alarm in case of fire or disorder.",
-    "To call the Petty Officer of the Watch in any case not covered by instructions.",
+    "To give the alarm in case of fire or disorder.",
+    "To call the Officer of the Deck in any case not covered by instructions.",
     "To salute all officers and all colors and standards not cased.",
     "To be especially watchful at night, and during the time for challenging, to challenge all persons on or near my post, and to allow no one to pass without proper authority."
   ]
